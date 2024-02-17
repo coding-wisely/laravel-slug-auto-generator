@@ -7,9 +7,6 @@
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/coding-wisely/laravel-slug-auto-generator/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/coding-wisely/laravel-slug-auto-generator/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/coding-wisely/laravel-slug-auto-generator.svg?style=flat-square)](https://packagist.org/packages/coding-wisely/laravel-slug-auto-generator)
 
-
-
-
 This package hosts a robust and flexible trait designed for effortless slug generation within Laravel applications. Whether you're building a blog, e-commerce platform, or any other web application, managing SEO-friendly URLs becomes seamless with this powerful solution.
 
 ## Key Features
