@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace CodingWisely\SlugGenerator\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class SlugGeneratorCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'laravel-slug-auto-generator';
 
     public $description = 'My command';
 
