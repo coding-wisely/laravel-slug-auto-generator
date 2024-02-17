@@ -51,15 +51,29 @@ php artisan vendor:publish --tag="laravel-slug-auto-generator-views"
 
 ## Usage
 
-```php
-$slugGenerator = new CodingWisely\SlugGenerator();
-echo $slugGenerator->echoPhrase('Hello, CodingWisely!');
-```
+1. **Integrate the Trait**: Simply integrate the `SlugGenerator` trait into your Eloquent model to unlock its powerful slug generation capabilities.
 
+2. **Configuration**: Customize the slug generation behavior by modifying the `sluggenerator.php` configuration file located in your `config` directory.
+
+3. **Effortless Integration**: With the trait seamlessly integrated into your model, enjoy automatic and unique slug generation without any additional setup.
+
+## Example
+
+```php
+use CodingWisely\SlugGenerator\SlugGenerator;
+use Illuminate\Database\Eloquent\Model;
+
+class YourModel extends Model
+{
+    use SlugGenerator;
+
+    // Your model's attributes and methods...
+}
+```
 ## Testing
 
 ```bash
-composer test
+composer test 
 ```
 
 ## Changelog
