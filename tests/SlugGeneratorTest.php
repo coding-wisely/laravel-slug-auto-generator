@@ -3,13 +3,12 @@
 namespace CodingWisely\SlugGenerator\Tests;
 
 use CodingWisely\SlugGenerator\SlugGenerator;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 use Orchestra\Testbench\TestCase;
 
 // Assumes SlugGenerator is a trait and not a Laravel Facade
-
 
 class SlugGeneratorTest extends TestCase
 {
@@ -46,11 +45,14 @@ class SlugGeneratorTest extends TestCase
         });
     }
 }
-class TestModel extends \Illuminate\Database\Eloquent\Model {
+class TestModel extends \Illuminate\Database\Eloquent\Model
+{
     use SlugGenerator;
 
     protected $table = 'test_models';
+
     protected $guarded = [];
+
     public $timestamps = false;
 
     public static function getSluggableField()

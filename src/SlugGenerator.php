@@ -33,18 +33,18 @@ trait SlugGenerator
 
         $existingSlugs = $this->getExistingSlugs($slug, $this->getTable());
 
-        if (!in_array($slug, $existingSlugs)) {
-            return $slug . ($slugNumber ? "-$slugNumber" : '');
+        if (! in_array($slug, $existingSlugs)) {
+            return $slug.($slugNumber ? "-$slugNumber" : '');
         }
 
         $i = $slugNumber ? ($slugNumber + 1) : 1;
         $uniqueSlugFound = false;
 
         // Antoni will like this one :D
-        while (!$uniqueSlugFound) {
-            $newSlug = $slug . '-' . $i;
+        while (! $uniqueSlugFound) {
+            $newSlug = $slug.'-'.$i;
 
-            if (!in_array($newSlug, $existingSlugs)) {
+            if (! in_array($newSlug, $existingSlugs)) {
                 // Unique slug found
                 return $newSlug;
             }
@@ -52,12 +52,12 @@ trait SlugGenerator
             $i++;
         }
 
-        return $originalSlug . '-' . mt_rand(1000, 9999);
+        return $originalSlug.'-'.mt_rand(1000, 9999);
     }
 
     private function getExistingSlugs(string $slug, string $table): array
     {
-        return $this->where('slug', 'LIKE', $slug . '%')
+        return $this->where('slug', 'LIKE', $slug.'%')
             ->where('id', '!=', $this->id ?? null)
             ->pluck('slug')
             ->toArray();
