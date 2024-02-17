@@ -2,9 +2,9 @@
 
 namespace CodingWisely\SlugGenerator;
 
+use CodingWisely\SlugGenerator\Commands\SlugGeneratorCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use CodingWisely\SlugGenerator\Commands\SlugGeneratorCommand;
 
 class SlugGeneratorServiceProvider extends PackageServiceProvider
 {

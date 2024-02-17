@@ -2,9 +2,9 @@
 
 namespace CodingWisely\SlugGenerator\Tests;
 
+use CodingWisely\SlugGenerator\SlugGeneratorServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use CodingWisely\SlugGenerator\SlugGeneratorServiceProvider;
 
 class TestCase extends Orchestra
 {
