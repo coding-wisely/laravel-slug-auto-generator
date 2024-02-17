@@ -40,11 +40,6 @@ return [
 ];
 ```
 
-Optionally, you can publish the views using
-
-```bash
-php artisan vendor:publish --tag="laravel-slug-auto-generator-views"
-```
 
 ## Usage
 
