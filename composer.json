@@ -1,9 +1,14 @@
 {
     "name": "coding-wisely/laravel-slug-auto-generator",
-    "description": "This is a package that will auto generate slugs for given models",
+    "description": "Auto generating unique slugs for your Laravel model",
     "keywords": [
         "CodingWisely",
         "laravel",
+        "laravel 10",
+        "laravel 11",
+        "unique slugs",
+        "slug",
+        "laravel slugs",
         "laravel-slug-auto-generator"
     ],
     "homepage": "https://github.com/coding-wisely/laravel-slug-auto-generator",
