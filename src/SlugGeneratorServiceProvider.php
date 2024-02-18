@@ -17,9 +17,6 @@ class SlugGeneratorServiceProvider extends PackageServiceProvider
          */
         $package
             ->name('laravel-slug-auto-generator')
-            ->hasConfigFile()
-            ->hasViews()
-            ->hasMigration('create_laravel-slug-auto-generator_table')
-            ->hasCommand(SlugGeneratorCommand::class);
+            ->hasConfigFile();
     }
 }

@@ -27,25 +27,26 @@ composer require coding-wisely/laravel-slug-auto-generator
 ```
 
 
-You can publish the config file with:
-
-```bash
-php artisan vendor:publish --tag="laravel-slug-auto-generator-config"
-```
+You can publish the config file with `php artisan vendor:publish` and select CodingWisely package from the list.
 
 This is the contents of the published config file:
 
 ```php
+// config for CodingWisely/SlugGenerator
+// replace it with your model column
 return [
+    'sluggable_field' => 'name',
 ];
+
 ```
+Replace with your field.
 
 
 ## Usage
 
 1. **Integrate the Trait**: Simply integrate the `SlugGenerator` trait into your Eloquent model to unlock its powerful slug generation capabilities.
 
-2. **Configuration**: Customize the slug generation behavior by modifying the `sluggenerator.php` configuration file located in your `config` directory.
+2. **Configuration**: Customize the slug generation behavior by modifying the `slug-auto-generator.php` configuration file located in your `config` directory.
 
 3. **Effortless Integration**: With the trait seamlessly integrated into your model, enjoy automatic and unique slug generation without any additional setup.
 
@@ -60,6 +61,12 @@ class YourModel extends Model
     use SlugGenerator;
 
     // Your model's attributes and methods...
+    
+    // override config file with 
+    public static function getSluggableField(): string
+    {
+        return 'title'; // your own field on Model
+    }
 }
 ```
 ## Testing

@@ -3,6 +3,7 @@
 namespace CodingWisely\SlugGenerator;
 
 use Illuminate\Support\Str;
+use InvalidArgumentException;
 
 trait SlugGenerator
 {
@@ -10,12 +11,17 @@ trait SlugGenerator
     {
         static::saving(function ($model) {
             $field = self::getSluggableField();
+
+            if (!in_array($field, array_keys($model->getAttributes()))) {
+                throw new InvalidArgumentException("{$field} does not exist in the model.");
+            }
+
             $slug = $model->slug ? $model->slug : Str::slug($model->{$field});
             $model->slug = $model->generateUniqueSlug($slug);
         });
     }
 
-    public static function getSluggableField(): string
+    protected static function getSluggableField(): string
     {
         return config('sluggenerator.sluggable_field') ?? 'name';
     }
@@ -40,7 +46,6 @@ trait SlugGenerator
         $i = $slugNumber ? ($slugNumber + 1) : 1;
         $uniqueSlugFound = false;
 
-        // Antoni will like this one :D
         while (! $uniqueSlugFound) {
             $newSlug = $slug.'-'.$i;
 
