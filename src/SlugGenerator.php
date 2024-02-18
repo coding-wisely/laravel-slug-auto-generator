@@ -12,7 +12,7 @@ trait SlugGenerator
         static::saving(function ($model) {
             $field = self::getSluggableField();
 
-            if (!in_array($field, array_keys($model->getAttributes()))) {
+            if (! in_array($field, array_keys($model->getAttributes()))) {
                 throw new InvalidArgumentException("{$field} does not exist in the model.");
             }
 
