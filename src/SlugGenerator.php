@@ -17,7 +17,7 @@ trait SlugGenerator
 
     public static function getSluggableField(): string
     {
-        return config('sluggenerator.sluggable_field');
+        return config('sluggenerator.sluggable_field') ?? 'name';
     }
 
     public function generateUniqueSlug(string $slug): string
