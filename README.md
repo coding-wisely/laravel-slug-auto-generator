@@ -15,6 +15,10 @@ This package hosts a robust and flexible trait designed for effortless slug gene
 
 - **Unique Slug Enforcement**: Ensures that generated slugs are unique within the database table, preventing conflicts and maintaining data integrity.
 
+- **SEO-Friendly URLs**: Facilitates the creation of SEO-friendly URLs by generating slugs based on user-friendly field values.
+
+- **Groupable Slugs**: Supports the generation of unique slugs within a specific group, allowing for distinct slugs across different categories or sections. This practically means that you can have the same slug in different categories/tasks/projects/posts/etc.
+
 - **Customizable Configuration**: Easily configure the field used for slug generation via Laravel's flexible configuration system, adapting to diverse project requirements effortlessly.
 
 
@@ -36,6 +40,7 @@ This is the contents of the published config file:
 // replace it with your model column
 return [
     'sluggable_field' => 'name',
+    'groupable_field' => null, // 'category_id',
 ];
 
 ```
@@ -66,6 +71,11 @@ class YourModel extends Model
     public static function getSluggableField(): string
     {
         return 'title'; // your own field on Model
+    }
+    // if you want to have unique slugs in different categories (groupable, such as project_id, team_id, category_id, etc.)
+    public static function getGroupableField(): ?string
+    {
+        return 'category_id'; // your own field on Model
     }
 }
 ```
