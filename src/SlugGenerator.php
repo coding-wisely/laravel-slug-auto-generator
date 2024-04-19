@@ -26,45 +26,35 @@ trait SlugGenerator
         return config('sluggenerator.sluggable_field') ?? 'name';
     }
 
-    public function generateUniqueSlug(string $slug): string
+    protected static function getGroupableField(): ?string
     {
-        // Check if the slug already has a number at the end
-        $originalSlug = $slug;
-        $slugNumber = 0;
-
-        if (preg_match('/-(\d+)$/', $slug, $matches)) {
-            $slugNumber = $matches[1];
-            $slug = Str::replaceLast("-$slugNumber", '', $slug);
-        }
-
-        $existingSlugs = $this->getExistingSlugs($slug, $this->getTable());
-
-        if (! in_array($slug, $existingSlugs)) {
-            return $slug.($slugNumber ? "-$slugNumber" : '');
-        }
-
-        $i = $slugNumber ? ($slugNumber + 1) : 1;
-        $uniqueSlugFound = false;
-
-        while (! $uniqueSlugFound) {
-            $newSlug = $slug.'-'.$i;
-
-            if (! in_array($newSlug, $existingSlugs)) {
-                // Unique slug found
-                return $newSlug;
-            }
-
-            $i++;
-        }
-
-        return $originalSlug.'-'.mt_rand(1000, 9999);
+        return config('sluggenerator.groupable_field') ?? null;
     }
 
-    private function getExistingSlugs(string $slug, string $table): array
+    public function generateUniqueSlug(string $slug): string
     {
-        return $this->where('slug', 'LIKE', $slug.'%')
-            ->where('id', '!=', $this->id ?? null)
-            ->pluck('slug')
-            ->toArray();
+        $originalSlug = $slug;
+        $slugNumberSuffix = '';
+
+        $existingSlugs = $this->getExistingSlugs($slug, $this->getTable(), $this->getGroupableField());
+
+        while (in_array($slug . $slugNumberSuffix, $existingSlugs)) {
+            $slugNumberSuffix = $slugNumberSuffix !== '' ? $slugNumberSuffix + 1 : 1;
+        }
+
+        return $slug . ($slugNumberSuffix !== '' ? '-' . $slugNumberSuffix : '');
+    }
+
+    private function getExistingSlugs(string $slug, string $table, ?string $groupable): array
+    {
+        $query = $this->where('slug', 'LIKE', $slug.'%')
+            ->where('id', '!=', $this->id ?? null);
+
+        // If a groupable field is present and is not null in this model, handle grouping.
+        if (!is_null($groupable) && !is_null($this->{$groupable})) {
+            $query->where($groupable, $this->{$groupable});
+        }
+
+        return $query->pluck('slug')->toArray();
     }
 }
