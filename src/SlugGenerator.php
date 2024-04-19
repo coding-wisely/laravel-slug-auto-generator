@@ -38,11 +38,11 @@ trait SlugGenerator
 
         $existingSlugs = $this->getExistingSlugs($slug, $this->getTable(), $this->getGroupableField());
 
-        while (in_array($slug . $slugNumberSuffix, $existingSlugs)) {
+        while (in_array($slug.$slugNumberSuffix, $existingSlugs)) {
             $slugNumberSuffix = $slugNumberSuffix !== '' ? $slugNumberSuffix + 1 : 1;
         }
 
-        return $slug . ($slugNumberSuffix !== '' ? '-' . $slugNumberSuffix : '');
+        return $slug.($slugNumberSuffix !== '' ? '-'.$slugNumberSuffix : '');
     }
 
     private function getExistingSlugs(string $slug, string $table, ?string $groupable): array
@@ -51,7 +51,7 @@ trait SlugGenerator
             ->where('id', '!=', $this->id ?? null);
 
         // If a groupable field is present and is not null in this model, handle grouping.
-        if (!is_null($groupable) && !is_null($this->{$groupable})) {
+        if (! is_null($groupable) && ! is_null($this->{$groupable})) {
             $query->where($groupable, $this->{$groupable});
         }
 

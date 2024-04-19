@@ -5,7 +5,6 @@ namespace CodingWisely\SlugGenerator\Tests;
 use CodingWisely\SlugGenerator\SlugGenerator;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Str;
 use Orchestra\Testbench\TestCase;
 
 // Assumes SlugGenerator is a trait and not a Laravel Facade
@@ -39,10 +38,10 @@ class SlugGeneratorTest extends TestCase
         $model5 = TestModel::create(['title' => $title]);
         $this->assertEquals('existing-title-1', $model5->slug);
 
-
         $model6 = TestModel::create(['title' => 'Groupable Title', 'groupable_field' => 1]);
         $this->assertEquals('groupable-title-1', $model6->slug);
     }
+
     protected function getEnvironmentSetUp($app)
     {
         $app['config']->set('database.default', 'sqlite');
@@ -79,6 +78,7 @@ class TestModel extends \Illuminate\Database\Eloquent\Model
     {
         return 'title';
     }
+
     public static function getGroupableField()
     {
         return 'groupable_field';
